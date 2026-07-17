@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueueCTL Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">QueueCTL</div>
+            <div class="quick-stats">
+                <span class="stat-badge"><span class="badge-label">Workers</span> <strong id="header-workers">-</strong></span>
+                <span class="stat-badge"><span class="badge-label">Queue</span> <strong id="header-queue">-</strong></span>
+                <span class="stat-badge"><span class="badge-label">Running</span> <strong id="header-running">-</strong></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Metrics Row -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Pending</div>
+                <div class="metric-value pending-color" id="metric-pending">-</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Running</div>
+                <div class="metric-value running-color" id="metric-running">-</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Failed</div>
+                <div class="metric-value failed-color" id="metric-failed">-</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">DLQ</div>
+                <div class="metric-value dlq-color" id="metric-dlq">-</div>
+            </div>
+        </section>
+
+        <!-- Charts Row -->
+        <section class="charts-row">
+            <div class="chart-card">
+                <div class="card-header">Queue History</div>
+                <div class="chart-container">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="card-header">Job Distribution</div>
+                <div class="chart-container">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <div class="bottom-row">
+            <!-- Jobs Table -->
+            <section class="table-section jobs-table-section">
+                <div class="card-header">Recent Jobs</div>
+                <div class="table-container">
+                    <table id="jobs-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Command</th>
+                                <th>Status</th>
+                                <th>Attempts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Workers List -->
+            <section class="table-section workers-table-section">
+                <div class="card-header">Active Workers</div>
+                <div class="table-container">
+                    <table id="workers-table">
+                        <thead>
+                            <tr>
+                                <th>Worker Name</th>
+                                <th>Status</th>
+                                <th>Current Job</th>
+                                <th>Heartbeat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
